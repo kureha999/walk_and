@@ -1,0 +1,13 @@
+<h1 class="text-center text-3xl font-bold text-logo-brown bg-background-blue p-6 rounded-lg">投稿詳細</h1>
+
+<div class="mt-4 text-center">
+  <p class="font-semibold text-xl text-logo-brown">投稿者: <%= @post.user.name %></p>
+</div>
+
+<div class="mt-4">
+  <%= image_tag @post.image, class: "w-full h-auto" %>
+</div>
+
+<div class="mt-4 p-6 bg-logo-brown text-cream">
+  <p><%= @post.body %></p>
+</div>
