@@ -45,9 +45,9 @@ gem "omniauth-rails_csrf_protection"
 # 環境変数を設定する
 gem "dotenv-rails"
 # Active Storageで画像のバリアントを生成するため
-gem 'image_processing', '~> 1.2'
+gem "image_processing", "~> 1.2"
 # ImageMagickを利用するため
-gem 'mini_magick', '~> 4.11'
+gem "mini_magick", "~> 4.11"
 
 
 group :development, :test do
