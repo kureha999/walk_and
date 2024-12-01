@@ -1,21 +1,22 @@
 <h1 class="text-center text-2xl font-bold">投稿一覧</h1>
 <div class="space-y-4 mt-4">
   <% @posts.each do |post| %>
-  <div class="border-b border-gray-300 p-4">
-    <div class="flex items-center">
-      <div class="flex-shrink-0">
-        <p class="font-semibold text-lg"><%= post.user.name %></p>
+  <div class="p-4 w-full bg-white shadow-lg">
+    <!-- 投稿コンテンツ -->
+    <div class="px-6">
+      <!-- 投稿者名の部分 -->
+      <div class="bg-background-blue text-logo-brown font-bold text-xl text-center py-2">
+        <%= post.user.name %>
       </div>
-    </div>
-    <div class="mt-2">
-      <% if post.image.attached? %>
-      <%= image_tag post.image, alt: "投稿画像" %>
-      <% else %>
-      <p>画像がありません</p>
-      <% end %>
-    </div>
-    <div class="mt-2">
-      <%= link_to '詳細を見る', post_path(post), class: 'text-blue-500' %>
+
+      <!-- 画像部分 -->
+      <div class="mt-0">
+        <% if post.image.attached? %>
+        <%= link_to post_path(post) do %>
+        <%= image_tag(post.image_as_thumbnail, alt: "#{post.user.name}の投稿画像", class: "rounded-lg shadow-lg w-full") %>
+        <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
   <% end %>

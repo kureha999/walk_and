@@ -81,4 +81,8 @@ Rails.application.configure do
 
   # ngrok設定
   config.hosts << ".ngrok-free.app"
+  # デフォルト
+  # config.active_storage.variant_processsor = :vips
+
+  config.active_storage.variant_processsor = :mini_magick
 end
