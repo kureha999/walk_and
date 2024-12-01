@@ -3,9 +3,7 @@
 one:
   user: one
   body: MyText
-  image: MyString
 
 two:
   user: two
   body: MyText
-  image: MyString

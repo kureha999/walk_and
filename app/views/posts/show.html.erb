@@ -5,7 +5,11 @@
 </div>
 
 <div class="mt-4">
+  <% if @post.image.attached? %>
   <%= image_tag @post.image, class: "w-full h-auto" %>
+  <% else %>
+  <p>画像がありません</p>
+  <% end %>
 </div>
 
 <div class="mt-4 p-6 bg-logo-brown text-cream">

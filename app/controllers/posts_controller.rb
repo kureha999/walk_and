@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
-  # ログイン中のuserの身に投稿、編集できるように
-  before_action :authenticate_user!, only: %i[new create]
+  # ログイン中のユーザーのみに投稿、編集、削除を許可
+  before_action :authenticate_user!, only: %i[new create edit update]
+  before_action :set_post, only: %i[show edit update delete_image]
+  before_action :authorize_user!, only: %i[edit update]
 
   def index
     @posts = Post.includes(:user).order(created_at: :desc)
@@ -20,21 +22,35 @@ class PostsController < ApplicationController
     end
   end
 
-  def show
-    @post = Post.find(params[:id])
+  def show; end
+
+  def edit; end
+
+  def update
+    if @post.update(post_params)
+      redirect_to post_path(@post), notice: "投稿が更新されました。"
+    else
+      flash.now[:alert] = "投稿の更新に失敗しました。"
+      render :edit
+    end
   end
 
-  def destroy
-    @post = Post.find(params[:id])
-    if @post.user == current_user
-      @post.destroy
-      redirect_to posts_path, notice: "投稿が削除されました。"
-    else
-      redirect_to posts_path, alert: "権限がありません。"
+  def delete_image
+    @post.image.purge
+    respond_to do |format|
+      format.turbo_stream { turbo_stream.remove(@post.image) }
     end
   end
 
   private
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  def authorize_user!
+    redirect_to posts_path, alert: "この投稿を編集する権限がありません。" unless @post.user == current_user
+  end
 
   def post_params
     params.require(:post).permit(:body, :image)
