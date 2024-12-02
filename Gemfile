@@ -48,6 +48,8 @@ gem "dotenv-rails"
 gem "image_processing", "~> 1.2"
 # ImageMagickを利用するため
 gem "mini_magick", "~> 4.11"
+# AWS..AmazonS3
+gem "aws-sdk-s3", require: false
 
 
 group :development, :test do

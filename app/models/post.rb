@@ -4,14 +4,17 @@ class Post < ApplicationRecord
 
   validates :body, presence: true, length: { maximum: 200 }
   validates :image, presence: true, unless: :image_optional?
-  validate :image_size
   validate :image_content_type
 
   # JPEGまたはPNG形式の画像に対して、幅200px・高さ100px指定
-  def image_as_thumbnail
-    return unless image.attached? && image.content_type.in?(%w[image/jpeg image/png image/gif image/heic])
-    image.variant(resize_to_fill: [ 800, 300 ]).processed # 横800px、高さ300pxに切り抜き
-  end
+  # ---- 今後サイズが確定したら使う(このままだとerrorが出る?) ----
+  # def image_as_thumbnail
+  #   # 画像が添付されていて、画像形式が適切であるかチェック
+  #   return unless image.attached? && image.content_type.in?(%w[image/jpeg image/png image/gif image/heic])
+  #   # 画像が添付されている場合にのみ variant を処理
+  #   image.variant(resize_to_fill: [800, 300]).processed
+  # end
+
 
   private
 
@@ -27,9 +30,10 @@ end
     end
   end
 
-  # 画像のサイズが1MBを超える場合、エラーを発生
-  def image_size
-    if image.attached? && image.blob.byte_size > 1.megabytes
-      errors.add(:image, "：1MB以下のファイルをアップロードしてください。")
-    end
-  end
+# 画像のサイズが1MBを超える場合、エラーを発生
+# ---- 画像サイズが大きい場合こちらでmegabyteを調節できるのか？今後調査 ----
+# def image_size
+#   if image.attached? && image.blob.byte_size > 1.megabytes
+#     errors.add(:image, "：1MB以下のファイルをアップロードしてください。")
+#   end
+# end

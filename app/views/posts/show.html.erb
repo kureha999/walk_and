@@ -8,7 +8,8 @@
   <% if @post.image.attached? %>
   <%= image_tag @post.image, class: "w-full h-auto" %>
   <% else %>
-  <p>画像がありません</p>
+  <!-- 画像が添付されていない場合の処理 -->
+  <%= image_tag 'walk_top.jpg', alt: 'デフォルト画像', class: "w-full h-auto" %>
   <% end %>
 </div>
 
