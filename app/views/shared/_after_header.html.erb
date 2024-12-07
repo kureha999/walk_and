@@ -8,7 +8,9 @@
     </div>
     <!-- 右側：リンクボタン -->
     <div class="flex space-x-4">
+      <!-- 今後:ログアウトlinkは、マイページで表示させる -->
       <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo: false } , class: 'bg-logo-brown text-text-cream px-4 py-2 rounded-full hover:opacity-90 text-sm' %>
+      <%= link_to 'マイページ', mypage_path, class: 'bg-logo-brown text-text-cream px-4 py-2 rounded-full hover:opacity-90 text-sm' %>
       <%= link_to '投稿する', new_post_path, class: 'bg-logo-brown text-text-cream px-4 py-2 rounded-full hover:opacity-90 text-sm' %>
       <%= link_to '投稿一覧', posts_path, class: 'bg-logo-brown text-text-cream px-4 py-2 rounded-full hover:opacity-90 text-sm' %>
     </div>

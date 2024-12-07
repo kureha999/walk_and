@@ -5,13 +5,14 @@ Rails.application.routes.draw do
     omniauth_callbacks: "omniauth_callbacks"
   }
 
-  resources :posts do
-    member do
-      delete "delete_image"
-    end
-  end
+  resources :posts
 
+  get "mypage", to: "users#show", as: "mypage"
+
+
+  # begin 初期Routes --------------------------------------------------------------
   get "up" => "rails/health#show", as: :rails_health_check
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
+  # end -------------------------------------------------------------------------------
 end

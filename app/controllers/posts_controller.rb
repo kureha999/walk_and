@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
   # ログイン中のユーザーのみに投稿、編集、削除を許可
-  before_action :authenticate_user!, only: %i[new create edit update]
-  before_action :set_post, only: %i[show edit update delete_image]
-  before_action :authorize_user!, only: %i[edit update]
+  before_action :authenticate_user!, only: %i[new create edit update destroy]
+  before_action :set_post, only: %i[show edit update destroy]
+  before_action :authorize_user!, only: %i[edit update destroy]
 
   def index
     @posts = Post.includes(:user).order(created_at: :desc)
@@ -35,11 +35,9 @@ class PostsController < ApplicationController
     end
   end
 
-  def delete_image
-    @post.image.purge
-    respond_to do |format|
-      format.turbo_stream { turbo_stream.remove(@post.image) }
-    end
+  def destroy
+    @post.destroy
+    redirect_to mypage_path, notice: "投稿を削除しました。"
   end
 
   private
