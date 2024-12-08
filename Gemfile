@@ -50,6 +50,10 @@ gem "image_processing", "~> 1.2"
 gem "mini_magick", "~> 4.11"
 # AWS..AmazonS3
 gem "aws-sdk-s3", require: false
+# カレンダー用
+gem "fullcalendar-rails"
+# カレンダーのform用
+gem "simple_form"
 
 
 group :development, :test do
