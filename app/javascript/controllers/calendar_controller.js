@@ -15,28 +15,8 @@ export default class extends Controller {
       editable: true,
 
       dateClick: (info) => {
-        const title = prompt('イベントタイトルを入力してください:');
-        if (title) {
-          fetch('/events', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content,
-            },
-            body: JSON.stringify({
-              event: {
-                title: title,
-                event_type: 0,
-                time: info.dateStr,
-                comment: '',
-              },
-            }),
-          })
-            .then((response) => response.json())
-            .then(() => {
-              calendar.refetchEvents();
-            });
-        }
+        const date = info.dateStr; // yyyy-mm-dd 形式の日付
+        window.location.href = `/events/dates/${date}`;
       },
 
       eventClick: (info) => {

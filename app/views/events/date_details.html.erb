@@ -1,0 +1,19 @@
+<div class="flex justify-between items-center">
+  <h1 class="text-xl font-bold"><%= @date %></h1>
+  <%= link_to "Add Event", new_event_path(date: @date), class: "bg-blue-500 text-white py-2 px-4 rounded" %>
+</div>
+
+<h2 class="mt-4 text-lg font-semibold">Events on <%= @date %></h2>
+<% if @events.any? %>
+<ul>
+  <% @events.each do |event| %>
+  <li>
+    <strong><%= event.title %></strong><br>
+    <%= event.event_type %> - <%= event.time %><br>
+    <%= event.comment %>
+  </li>
+  <% end %>
+</ul>
+<% else %>
+<p>No events for this day.</p>
+<% end %>

@@ -8,15 +8,15 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = current_user.events.build
+    @event = current_user.events.build(time: params[:date]) # URLのdateパラメータを利用
   end
 
   def create
     @event = current_user.events.build(event_params)
     if @event.save
-      render json: { status: "success", event: @event }
+      redirect_to events_path, notice: "Event created successfully."
     else
-      render json: { status: "error", errors: @event.errors.full_messages }
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -33,6 +33,11 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     render json: { status: "success" }
+  end
+
+  def date_details
+    @date = params[:date]
+    @events = current_user.events.where("time::timestamp::date = ?", @date) # timeをtimestamp型にキャストし、その後dateにキャスト
   end
 
   private

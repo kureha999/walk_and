@@ -8,8 +8,9 @@ Rails.application.routes.draw do
   resources :posts
 
 
-  resources :events, only: %i[index new create edit update destroy]
-
+  resources :events do
+    get "dates/:date", to: "events#date_details", on: :collection, as: :date
+  end
 
   get "mypage", to: "users#show", as: "mypage"
 
