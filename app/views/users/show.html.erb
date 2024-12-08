@@ -1,7 +1,8 @@
-<div class="bg-background-blue py-6">
+<div class="bg-background-blue py-6 relative">
   <h1 class="text-center text-2xl font-bold text-logo-brown">
     <%= current_user.name %> のマイページ
   </h1>
+  <%= link_to "記録する", events_path, class: "absolute right-4 top-1/2 transform -translate-y-1/2 px-4 py-2 bg-logo-brown text-text-cream font-semibold rounded shadow" %>
 </div>
 
 <div class="flex justify-center space-x-4 mt-4">
