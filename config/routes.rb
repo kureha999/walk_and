@@ -7,10 +7,15 @@ Rails.application.routes.draw do
 
   resources :posts
 
+
+  resources :events, only: %i[index new create edit update destroy]
+
+
   get "mypage", to: "users#show", as: "mypage"
 
 
   # begin 初期Routes --------------------------------------------------------------
+
   get "up" => "rails/health#show", as: :rails_health_check
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
