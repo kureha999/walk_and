@@ -9,13 +9,14 @@ export default class extends Controller {
     const calendar = new Calendar(this.element, {
       plugins: [dayGridPlugin, interactionPlugin],
       initialView: 'dayGridMonth',
+      timeZone: 'Asia/Tokyo',
       locale: jaLocale,
       events: '/events.json',
       selectable: true,
       editable: true,
 
       dateClick: (info) => {
-        const date = info.dateStr; // yyyy-mm-dd 形式の日付
+        const date = info.dateStr;
         window.location.href = `/events/dates/${date}`;
       },
 
@@ -27,9 +28,19 @@ export default class extends Controller {
               'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content,
             },
           })
-            .then((response) => response.json())
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Failed to delete event');
+              }
+              return response.json();
+            })
             .then(() => {
-              calendar.refetchEvents();
+              info.event.remove(); // カレンダーから削除
+              alert('イベントを削除しました');
+            })
+            .catch((error) => {
+              alert('イベントの削除に失敗しました');
+              console.error(error);
             });
         }
       },
