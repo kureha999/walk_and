@@ -16,7 +16,7 @@ export default class extends Controller {
       editable: true,
 
       dateClick: (info) => {
-        const date = info.dateStr;
+        const date = new Date(info.date).toISOString().split("T")[0]; // UTC基準の日付を取得
         window.location.href = `/events/dates/${date}`;
       },
     });
