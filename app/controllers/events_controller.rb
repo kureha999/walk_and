@@ -47,9 +47,16 @@ class EventsController < ApplicationController
 
   def destroy
     if @event.destroy
-      render json: { status: "success" }, status: :ok
+      respond_to do |format|
+        format.html { redirect_to events_path, notice: "Event deleted successfully." }
+        format.json { render json: { status: "success" }, status: :ok }
+        format.turbo_stream # Turbo Streams に対応
+      end
     else
-      render json: { status: "error" }, status: :unprocessable_entity
+      respond_to do |format|
+        format.html { redirect_to events_path, alert: "Failed to delete event." }
+        format.json { render json: { status: "error" }, status: :unprocessable_entity }
+      end
     end
   end
 
