@@ -1,6 +1,11 @@
 <div class="flex justify-between items-center">
   <h1 class="text-xl font-bold"><%= @date %></h1>
-  <%= link_to "Add Event", new_event_path(date: @date), class: "bg-blue-500 text-white py-2 px-4 rounded" %>
+  <div class="flex space-x-4">
+    <!-- 横並びにするためのflexコンテナ -->
+    <%= link_to "戻る", events_path, class: "px-4 py-2 bg-logo-brown text-text-cream font-semibold rounded shadow" %>
+    <%= link_to "Add Event", new_event_path(date: @date), class: "px-4 py-2 bg-logo-brown text-text-cream font-semibold rounded shadow" %>
+    <!-- 同じクラスを追加 -->
+  </div>
 </div>
 
 <h2 class="mt-4 text-lg font-semibold">Events on <%= @date %></h2>
