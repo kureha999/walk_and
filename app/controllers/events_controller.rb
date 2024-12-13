@@ -65,6 +65,7 @@ class EventsController < ApplicationController
 
   def date_details
     @date = params[:date]
+    Rails.logger.info "Date received: #{@date}"
     @events = current_user.events
                           .where("time::timestamp::date = ?", @date) # timeをtimestamp型にキャストし、その後dateにキャスト
                           .order(time: :asc) # 時間順に並べる

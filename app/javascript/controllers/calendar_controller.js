@@ -19,11 +19,6 @@ export default class extends Controller {
         const date = info.dateStr;
         window.location.href = `/events/dates/${date}`;
       },
-
-      dateClick: (info) => {
-        const date = info.dateStr;
-        window.location.href = `/events/${date}`;  // IDを使ったイベント詳細ページへの遷移
-      }
     });
 
     calendar.render();
