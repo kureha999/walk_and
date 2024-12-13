@@ -7,7 +7,8 @@
 <% if @events.any? %>
 <ul>
   <% @events.each do |event| %>
-  <li class="mb-4">
+  <li id="<%= dom_id(event) %>" class="mb-4">
+    <!-- ID を追加 -->
     <strong><%= event.title %></strong><br>
     <%= event.event_type %> - <%= l(event.time, format: :short) %><br>
     <%= event.comment %>
@@ -15,7 +16,7 @@
       <%= link_to "Edit", edit_event_path(event), class: "text-blue-500 hover:underline" %> |
       <%= link_to "Delete", event_path(event),
               method: :delete,
-              data: { confirm: "Are you sure?" },
+              data: { turbo_stream: true},
               class: "text-red-500 hover:underline" %>
     </div>
   </li>
