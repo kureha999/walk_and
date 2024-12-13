@@ -3,7 +3,7 @@
   <div class="flex space-x-4">
     <!-- 横並びにするためのflexコンテナ -->
     <%= link_to "戻る", events_path, class: "px-4 py-2 bg-logo-brown text-text-cream font-semibold rounded shadow" %>
-    <%= link_to "Add Event", new_event_path(date: @date), class: "px-4 py-2 bg-logo-brown text-text-cream font-semibold rounded shadow" %>
+    <%= link_to "追加する", new_event_path(date: @date), class: "px-4 py-2 bg-logo-brown text-text-cream font-semibold rounded shadow" %>
     <!-- 同じクラスを追加 -->
   </div>
 </div>
@@ -18,11 +18,11 @@
     <%= event.event_type %> - <%= l(event.time, format: :short) %><br>
     <%= event.comment %>
     <div class="mt-2">
-      <%= link_to "Edit", edit_event_path(event), class: "text-blue-500 hover:underline" %> |
+      <%= link_to "Edit", edit_event_path(event), class: "px-4 py-2 bg-logo-brown text-text-cream font-semibold rounded shadow" %>
       <%= link_to "Delete", event_path(event),
               method: :delete,
               data: { turbo_stream: true},
-              class: "text-red-500 hover:underline" %>
+              class: "px-4 py-2 bg-logo-brown text-text-cream font-semibold rounded shadow" %>
     </div>
   </li>
   <% end %>

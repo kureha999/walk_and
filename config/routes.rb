@@ -5,15 +5,14 @@ Rails.application.routes.draw do
     omniauth_callbacks: "omniauth_callbacks"
   }
 
+    # 日付ごとのイベント詳細のルートを `resources :events` の外に定義
+  get "events/dates/:date", to: "events#date_details", as: "event_date"
+
   resources :posts
 
-
-  resources :events do
-    get "dates/:date", to: "events#date_details", on: :collection, as: :date
-  end
+  resources :events
 
   get "mypage", to: "users#show", as: "mypage"
-
 
   # begin 初期Routes --------------------------------------------------------------
 
