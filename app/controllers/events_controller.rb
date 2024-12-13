@@ -21,6 +21,9 @@ class EventsController < ApplicationController
     end
   end
 
+  def show
+    @event = Event.find(params[:id])  # イベントIDをもとにイベントを取得
+  end
 
   def new
     @event = current_user.events.build(time: params[:date]) # URLのdateパラメータを利用
