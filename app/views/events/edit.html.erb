@@ -1,0 +1,19 @@
+<%= form_with(model: @event, local: true) do |form| %>
+<div class="mb-4">
+  <%= form.label :title, "Title" %>
+  <%= form.text_field :title, class: "border rounded p-2 w-full" %>
+</div>
+<div class="mb-4">
+  <%= form.label :event_type, "Event Type" %>
+  <%= form.select :event_type, Event.event_types.keys.map { |key| [key.humanize.capitalize, key] }, {}, class: "border rounded p-2 w-full" %>
+</div>
+<div class="mb-4">
+  <%= form.label :time, "Time" %>
+  <%= form.datetime_local_field :time, value: @event.time, class: "border rounded p-2 w-full" %>
+</div>
+<div class="mb-4">
+  <%= form.label :comment, "Comment" %>
+  <%= form.text_area :comment, class: "border rounded p-2 w-full" %>
+</div>
+<%= form.submit "Create Event", class: "bg-green-500 text-white py-2 px-4 rounded" %>
+<% end %>
